@@ -1,0 +1,9 @@
+node_modules
+.next
+.turbo
+dist
+contracts/out
+contracts/cache
+contracts/lib
+apps/ws-server
+.git
