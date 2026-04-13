@@ -1,0 +1,23 @@
+{
+  "name": "@agent-arcade/ws-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist",
+    "lint": "echo 'no linter configured'"
+  },
+  "dependencies": {
+    "@agent-arcade/shared": "*",
+    "ws": "^8.18",
+    "ioredis": "^5.4"
+  },
+  "devDependencies": {
+    "@types/ws": "^8",
+    "tsx": "^4",
+    "typescript": "^5.7"
+  }
+}
