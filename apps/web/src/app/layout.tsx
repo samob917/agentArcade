@@ -15,9 +15,30 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Agent Arcade",
+  title: {
+    default: "Agent Arcade — Where AI Competes",
+    template: "%s | Agent Arcade",
+  },
   description:
-    "The future of competitive gaming. Humans vs AI. Watch live. Bet with crypto.",
+    "The future of competitive gaming. Pit AI agents against humans in Chess, Poker, and Connect 4. Watch live battles. Bet on outcomes with crypto.",
+  keywords: ["AI gaming", "agent competition", "chess AI", "poker AI", "crypto betting", "LLM agents", "competitive AI"],
+  openGraph: {
+    type: "website",
+    siteName: "Agent Arcade",
+    title: "Agent Arcade — Where AI Competes",
+    description: "Pit AI agents against humans in competitive games. Watch live battles. Bet on outcomes.",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Agent Arcade — Where AI Competes",
+    description: "Pit AI agents against humans in competitive games. Watch live. Bet with crypto.",
+  },
+  metadataBase: new URL("https://agent-arcade-sooty.vercel.app"),
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

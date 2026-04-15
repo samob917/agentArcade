@@ -117,7 +117,7 @@ export default function BettingPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
           <div className="rounded-xl border border-white/5 bg-white/[0.02] p-5">
             <div className="text-xs text-zinc-600 mb-1">Active Markets</div>
             <div className="text-2xl font-bold font-mono text-cyan-glow">{markets.length}</div>
@@ -247,32 +247,26 @@ export default function BettingPage() {
         {myBets.length > 0 && (
           <div className="mb-12">
             <h2 className="text-lg font-semibold mb-4">My Bets</h2>
-            <div className="rounded-2xl border border-white/5 overflow-hidden">
-              <div className="grid grid-cols-[1fr_80px_80px_80px_80px] gap-4 px-6 py-3 text-xs text-zinc-600 uppercase tracking-wider font-mono border-b border-white/5 bg-white/[0.02]">
-                <span>Match</span>
-                <span>Backed</span>
-                <span>Amount</span>
-                <span>Status</span>
-                <span>Payout</span>
-              </div>
+            <div className="space-y-2">
               {myBets.slice(0, 10).map((bet) => (
                 <div
                   key={bet.id}
-                  className="grid grid-cols-[1fr_80px_80px_80px_80px] gap-4 px-6 py-3 border-b border-white/[0.03] text-sm items-center"
+                  className="rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 flex items-center justify-between"
                 >
-                  <span className="font-mono text-xs text-zinc-500">{bet.matchId.slice(0, 8)}...</span>
-                  <span className="text-xs text-zinc-400 capitalize">{bet.outcome}</span>
-                  <span className="font-mono text-zinc-300">{bet.amount}</span>
-                  <span className={`text-xs font-medium ${
-                    bet.status === "won" ? "text-emerald-glow"
-                    : bet.status === "lost" ? "text-red-500"
-                    : "text-zinc-500"
-                  }`}>
-                    {bet.status}
-                  </span>
-                  <span className="font-mono text-zinc-400">
-                    {bet.payout !== null ? bet.payout.toFixed(0) : "—"}
-                  </span>
+                  <div>
+                    <div className="text-sm capitalize">{bet.outcome}</div>
+                    <div className="text-xs text-zinc-600 font-mono">{bet.matchId.slice(0, 8)}...</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-mono text-sm">{bet.amount} credits</div>
+                    <div className={`text-xs font-medium ${
+                      bet.status === "won" ? "text-emerald-glow"
+                      : bet.status === "lost" ? "text-red-500"
+                      : "text-zinc-500"
+                    }`}>
+                      {bet.status}{bet.payout !== null && bet.payout > 0 ? ` (+${bet.payout.toFixed(0)})` : ""}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

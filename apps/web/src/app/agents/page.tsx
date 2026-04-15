@@ -48,7 +48,8 @@ export default function AgentsPage() {
         {/* Leaderboard */}
         {agents.length > 0 ? (
           <div className="rounded-2xl border border-white/5 overflow-hidden">
-            <div className="grid grid-cols-[60px_1fr_80px_100px_80px_120px_80px] gap-4 px-6 py-3 text-xs text-zinc-600 uppercase tracking-wider font-mono border-b border-white/5 bg-white/[0.02]">
+            {/* Desktop table header */}
+            <div className="hidden lg:grid grid-cols-[60px_1fr_80px_100px_80px_120px_80px] gap-4 px-6 py-3 text-xs text-zinc-600 uppercase tracking-wider font-mono border-b border-white/5 bg-white/[0.02]">
               <span>Rank</span>
               <span>Agent</span>
               <span>ELO</span>
@@ -59,51 +60,51 @@ export default function AgentsPage() {
             </div>
 
             {agents.map((agent, i) => (
-              <div
-                key={agent.id}
-                className="grid grid-cols-[60px_1fr_80px_100px_80px_120px_80px] gap-4 px-6 py-4 border-b border-white/[0.03] hover:bg-white/[0.02] transition-colors items-center"
-              >
-                <span
-                  className={`text-lg font-bold font-mono ${
-                    i === 0
-                      ? "text-yellow-500"
-                      : i === 1
-                        ? "text-zinc-400"
-                        : i === 2
-                          ? "text-amber-700"
-                          : "text-zinc-600"
-                  }`}
-                >
-                  #{i + 1}
-                </span>
-                <div>
-                  <div className="font-semibold text-sm flex items-center gap-2">
-                    {agent.name}
-                    {agent.isBuiltIn && (
-                      <span className="text-[9px] uppercase tracking-widest bg-cyan-glow/10 text-cyan-glow px-1.5 py-0.5 rounded border border-cyan-glow/20">
-                        Built-in
-                      </span>
-                    )}
+              <div key={agent.id}>
+                {/* Desktop row */}
+                <div className="hidden lg:grid grid-cols-[60px_1fr_80px_100px_80px_120px_80px] gap-4 px-6 py-4 border-b border-white/[0.03] hover:bg-white/[0.02] transition-colors items-center">
+                  <span className={`text-lg font-bold font-mono ${i === 0 ? "text-yellow-500" : i === 1 ? "text-zinc-400" : i === 2 ? "text-amber-700" : "text-zinc-600"}`}>
+                    #{i + 1}
+                  </span>
+                  <div>
+                    <div className="font-semibold text-sm flex items-center gap-2">
+                      {agent.name}
+                      {agent.isBuiltIn && (
+                        <span className="text-[9px] uppercase tracking-widest bg-cyan-glow/10 text-cyan-glow px-1.5 py-0.5 rounded border border-cyan-glow/20">
+                          Built-in
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-xs text-zinc-600 mt-0.5 line-clamp-1">{agent.description}</div>
                   </div>
-                  <div className="text-xs text-zinc-600 mt-0.5 line-clamp-1">
-                    {agent.description}
+                  <span className="font-mono text-sm font-semibold text-cyan-glow">{agent.elo}</span>
+                  <span className="font-mono text-xs text-zinc-400">{agent.record}</span>
+                  <span className="font-mono text-sm text-emerald-glow">{agent.winRate}</span>
+                  <span className="text-xs text-zinc-500">{agent.supportedGames.join(", ")}</span>
+                  <span className="text-xs text-zinc-600 font-mono">{agent.llmProvider || "—"}</span>
+                </div>
+
+                {/* Mobile card */}
+                <div className="lg:hidden flex items-center gap-4 px-4 py-4 border-b border-white/[0.03]">
+                  <span className={`text-lg font-bold font-mono w-8 ${i === 0 ? "text-yellow-500" : i === 1 ? "text-zinc-400" : i === 2 ? "text-amber-700" : "text-zinc-600"}`}>
+                    #{i + 1}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-semibold text-sm flex items-center gap-2">
+                      {agent.name}
+                      {agent.isBuiltIn && (
+                        <span className="text-[9px] uppercase tracking-widest bg-cyan-glow/10 text-cyan-glow px-1.5 py-0.5 rounded border border-cyan-glow/20">
+                          Built-in
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-3 mt-1 text-xs">
+                      <span className="font-mono text-cyan-glow">{agent.elo}</span>
+                      <span className="text-zinc-600">{agent.record}</span>
+                      <span className="text-emerald-glow">{agent.winRate}</span>
+                    </div>
                   </div>
                 </div>
-                <span className="font-mono text-sm font-semibold text-cyan-glow">
-                  {agent.elo}
-                </span>
-                <span className="font-mono text-xs text-zinc-400">
-                  {agent.record}
-                </span>
-                <span className="font-mono text-sm text-emerald-glow">
-                  {agent.winRate}
-                </span>
-                <span className="text-xs text-zinc-500">
-                  {agent.supportedGames.join(", ")}
-                </span>
-                <span className="text-xs text-zinc-600 font-mono">
-                  {agent.llmProvider || "—"}
-                </span>
               </div>
             ))}
           </div>

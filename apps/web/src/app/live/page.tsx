@@ -242,7 +242,7 @@ export default function LivePage() {
 
         {/* Current Match */}
         {match && (
-          <div className="grid md:grid-cols-[1fr_auto_1fr] gap-8 items-start mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start mb-10">
             {/* Player A (left) */}
             <div className={`rounded-2xl border p-6 text-right transition-all ${
               match.status === "playing" && match.state &&
