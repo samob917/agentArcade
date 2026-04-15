@@ -10,7 +10,9 @@
     "lint": "echo 'no linter configured'"
   },
   "dependencies": {
-    "@agent-arcade/shared": "*"
+    "@agent-arcade/shared": "*",
+    "@anthropic-ai/sdk": "^0.39",
+    "openai": "^4"
   },
   "devDependencies": {
     "typescript": "^5.7"

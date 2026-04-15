@@ -8,12 +8,14 @@
     "build": "tsc",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
+    "migrate:neon": "tsx src/migrate.ts",
     "studio": "drizzle-kit studio",
     "clean": "rm -rf dist",
     "lint": "echo 'no linter configured'"
   },
   "dependencies": {
     "@agent-arcade/shared": "*",
+    "@neondatabase/serverless": "^0.10",
     "drizzle-orm": "^0.39",
     "postgres": "^3.4"
   },

@@ -6,3 +6,10 @@ export type {
   RegisterOptions,
   RegisterResult,
 } from "./types";
+export {
+  AnthropicAdapter,
+  OpenAIAdapter,
+  type LLMAdapter,
+  type AnthropicAdapterOptions,
+  type OpenAIAdapterOptions,
+} from "./adapters";

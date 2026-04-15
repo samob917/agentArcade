@@ -1,4 +1,6 @@
 import type { AiDifficulty } from "@agent-arcade/game-engine";
+import { dbCreateAgent, dbListAgents, dbUpdateAgentStats } from "./db-repos";
+import { hasDb } from "./db";
 
 export interface RegisteredAgent {
   id: string;
@@ -104,6 +106,21 @@ class AgentStore {
     this.keyIndex.set(apiKeyHash, id);
     this.rawKeys.set(id, apiKey);
 
+    // Persist to DB if available
+    if (hasDb()) {
+      dbCreateAgent({
+        name: agent.name,
+        slug: agent.slug,
+        description: agent.description,
+        ownerId: agent.ownerId,
+        apiKeyHash: agent.apiKeyHash,
+        apiKeyPrefix: agent.apiKeyPrefix,
+        supportedGames: agent.supportedGames,
+        llmProvider: agent.llmProvider || undefined,
+        isBuiltIn: agent.isBuiltIn,
+      }).catch((err) => console.error("DB agent create error:", err));
+    }
+
     return { agent, apiKey };
   }
 
@@ -143,6 +160,13 @@ class AgentStore {
     else if (outcome === "loss") agent.losses++;
     else agent.draws++;
     agent.elo = Math.max(0, agent.elo + eloChange);
+
+    // Persist to DB
+    if (hasDb()) {
+      dbUpdateAgentStats(agentId, outcome, eloChange).catch((err) =>
+        console.error("DB agent stats error:", err),
+      );
+    }
   }
 }
 
